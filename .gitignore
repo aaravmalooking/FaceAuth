@@ -2,3 +2,4 @@
 ~*
 python_src/.model.py.swp
 dataset
+python_src/__pycache__/

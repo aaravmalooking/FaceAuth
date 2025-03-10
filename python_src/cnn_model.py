@@ -11,6 +11,7 @@ from tensorflow.keras import layers, Model  # Import Keras layers and Model
 
 def build_embedding_model(input_shape=(128, 128, 3), embedding_size=128):
     inputs = tf.keras.Input(shape=input_shape)
+    
 
     x = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(inputs)
     x = layers.MaxPooling2D((2, 2))(x)
