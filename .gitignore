@@ -3,3 +3,5 @@
 python_src/.model.py.swp
 dataset
 python_src/__pycache__/
+python_src/test.py
+# the test.py file is for debugging purposes and stuff, it contains nothing important.
