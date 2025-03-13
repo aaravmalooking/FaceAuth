@@ -1,7 +1,7 @@
-# final_model.py
-from cnn_model import embedding_model  # Import the trained model
-from preparer import load_and_preprocess_image  # Import the preprocessing function
-import numpy as np  # For array operations
+
+from cnn_model import embedding_model
+from preparer import load_and_preprocess_image
+import numpy as np
 
 
 def compute_embedding(image, model):
@@ -9,7 +9,7 @@ def compute_embedding(image, model):
     return model.predict(img)[0]
 
 
-# Assume dataset is available from preparer.py (you might need to save/load it)
+
 from preparer import dataset_data
 
 dataset = dataset_data['dataset']
@@ -20,7 +20,7 @@ for person_name, images in dataset.items():
         embeddings = [compute_embedding(img, embedding_model) for img in images]
         known_embeddings[person_name] = np.mean(embeddings, axis=0)
 
-# Test with a new image
+
 test_image_path = r"C:\Users\Aarav Maloo\Desktop\FaceAuth\dataset\lfw-deepfunneled\Aaron_Eckhart\test.jpg"  # Replace with your test image
 test_face = load_and_preprocess_image(test_image_path)
 if test_face is None:
@@ -31,7 +31,6 @@ else:
 
     def euclidean_distance(v1, v2):
         return np.sqrt(np.sum((v1 - v2) ** 2))
-
 
     min_dist = float('inf')
     best_match = None
