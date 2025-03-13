@@ -1,12 +1,12 @@
-# cnn_model.py
-import tensorflow as tf  # Import the full TensorFlow module
+
+import tensorflow as tf
 
 # Diagnostic check
 print("TensorFlow version:", tf.__version__)
 if not hasattr(tf, 'keras'):
     raise ImportError("Keras is not available in this TensorFlow installation.")
 
-from tensorflow.keras import layers, Model  # Import Keras layers and Model
+from tensorflow.keras import layers, Model
 
 
 def build_embedding_model(input_shape=(128, 128, 3), embedding_size=128):
@@ -25,14 +25,14 @@ def build_embedding_model(input_shape=(128, 128, 3), embedding_size=128):
     x = layers.Dropout(0.5)(x)
 
     embeddings = layers.Dense(embedding_size, activation=None)(x)
-    # Use Lambda layer to apply l2_normalize
+
     embeddings = layers.Lambda(lambda x: tf.nn.l2_normalize(x, axis=1))(embeddings)
-    # - Lambda wraps the TensorFlow operation, making it compatible with Keras
+
 
     model = Model(inputs, embeddings)
     return model
 
 
-# Build and store the model
+
 embedding_model = build_embedding_model()
 print("Model built successfully!")
