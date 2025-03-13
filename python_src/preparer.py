@@ -1,17 +1,17 @@
-# preparer.py
-import cv2  # For image loading and optional face detection
-import numpy as np  # For array operations
-import os  # For file and folder navigation
+
+import cv2
+import numpy as np
+import os
 
 
-# Function to load and preprocess one image
+
 def load_and_preprocess_image(image_path, target_size=(128, 128)):
     img = cv2.imread(image_path)
     if img is None:
         return None
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    # Optional face detection (since images are pre-aligned)
+
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     if len(faces) > 0:
@@ -23,11 +23,10 @@ def load_and_preprocess_image(image_path, target_size=(128, 128)):
     return img
 
 
-# Load the dataset (limit to 100 people for now)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 dataset = {}
 data_dir = r"C:\Users\Aarav Maloo\Desktop\FaceAuth\dataset\lfw-deepfunneled"
-for person_name in list(os.listdir(data_dir)):  # Limit to 100 people
+for person_name in list(os.listdir(data_dir)):
     person_dir = os.path.join(data_dir, person_name)
     if not os.path.isdir(person_dir):
         continue
@@ -51,5 +50,5 @@ y = np.array(y)
 
 print(f"Loaded {len(X)} images across {len(dataset)} people.")
 
-# Make X and y available to other files
+
 dataset_data = {'X': X, 'y': y, 'dataset': dataset}
